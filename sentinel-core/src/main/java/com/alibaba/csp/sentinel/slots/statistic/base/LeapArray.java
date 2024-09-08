@@ -40,11 +40,24 @@ import com.alibaba.csp.sentinel.util.TimeUtil;
  */
 public abstract class LeapArray<T> {
 
+    /**
+     * 每个bucket的时间窗口大小
+     *
+     */
     protected int windowLengthInMs;
+    /**
+     * sampleCount = intervalInMs / windowLengthInMs
+     */
     protected int sampleCount;
+    /**
+     * 整体窗口的时间长度
+     */
     protected int intervalInMs;
     private double intervalInSecond;
 
+    /**
+     * bucket数组
+     */
     protected final AtomicReferenceArray<WindowWrap<T>> array;
 
     /**
@@ -118,8 +131,10 @@ public abstract class LeapArray<T> {
             return null;
         }
 
+        // 计算当前时间在array中的下标（循环数组）
         int idx = calculateTimeIdx(timeMillis);
         // Calculate current bucket start time.
+        // 计算bucket的起始时间
         long windowStart = calculateWindowStart(timeMillis);
 
         /*

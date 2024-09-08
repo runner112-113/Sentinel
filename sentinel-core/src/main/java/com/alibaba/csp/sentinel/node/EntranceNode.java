@@ -25,11 +25,13 @@ import com.alibaba.csp.sentinel.slots.nodeselector.NodeSelectorSlot;
  * A {@link Node} represents the entrance of the invocation tree.
  * </p>
  * <p>
- * One {@link Context} will related to a {@link EntranceNode},
+ * <b>One {@link Context} will related to a {@link EntranceNode}</b>,
  * which represents the entrance of the invocation tree. New {@link EntranceNode} will be created if
  * current context does't have one. Note that same context name will share same {@link EntranceNode}
  * globally.
  * </p>
+ *
+ * <p>一个Context关联一个EntranceNode</p>
  *
  * @author qinan.qn
  * @see ContextUtil

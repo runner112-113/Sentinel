@@ -100,6 +100,7 @@ public final class FlowRuleUtil {
             if (StringUtil.isBlank(rule.getLimitApp())) {
                 rule.setLimitApp(RuleConstant.LIMIT_APP_DEFAULT);
             }
+            // 构建流量整形控制器：一个FlowRule对应一个TrafficShapingController
             TrafficShapingController rater = generateRater(rule);
             rule.setRater(rater);
 
@@ -133,9 +134,11 @@ public final class FlowRuleUtil {
     private static TrafficShapingController generateRater(/*@Valid*/ FlowRule rule) {
         if (rule.getGrade() == RuleConstant.FLOW_GRADE_QPS) {
             switch (rule.getControlBehavior()) {
+                // warm up
                 case RuleConstant.CONTROL_BEHAVIOR_WARM_UP:
                     return new WarmUpController(rule.getCount(), rule.getWarmUpPeriodSec(),
                             ColdFactorProperty.coldFactor);
+                    // 匀速器
                 case RuleConstant.CONTROL_BEHAVIOR_RATE_LIMITER:
                     return new ThrottlingController(rule.getMaxQueueingTimeMs(), rule.getCount());
                 case RuleConstant.CONTROL_BEHAVIOR_WARM_UP_RATE_LIMITER:
@@ -146,6 +149,7 @@ public final class FlowRuleUtil {
                     // Default mode or unknown mode: default traffic shaping controller (fast-reject).
             }
         }
+        // 直接拒绝
         return new DefaultController(rule.getCount(), rule.getGrade());
     }
 

@@ -25,6 +25,8 @@ import com.alibaba.csp.sentinel.util.AssertUtil;
 import com.alibaba.csp.sentinel.util.TimeUtil;
 
 /**
+ *
+ * 匀速器
  * @author Eric Zhao
  * @author jialiang.linjl
  * @since 2.0
@@ -74,6 +76,7 @@ public class ThrottlingController implements TrafficShapingController {
         final long costTimeNs = Math.round(1.0d * MS_TO_NS_OFFSET * statDurationMs * acquireCount / maxCountPerStat);
 
         // Expected pass time of this request.
+        // 不保证原子性
         long expectedTime = costTimeNs + latestPassedTime.get();
 
         if (expectedTime <= currentTime) {
@@ -84,17 +87,21 @@ public class ThrottlingController implements TrafficShapingController {
             final long curNanos = System.nanoTime();
             // Calculate the time to wait.
             long waitTime = costTimeNs + latestPassedTime.get() - curNanos;
+            // 等待时间超过最大等待时长 false
             if (waitTime > maxQueueingTimeNs) {
                 return false;
             }
 
+            // CAS ---> race condition
             long oldTime = latestPassedTime.addAndGet(costTimeNs);
+            // check again
             waitTime = oldTime - curNanos;
             if (waitTime > maxQueueingTimeNs) {
                 latestPassedTime.addAndGet(-costTimeNs);
                 return false;
             }
             // in race condition waitTime may <= 0
+            // 睡眠  Nanos --> park
             if (waitTime > 0) {
                 sleepNanos(waitTime);
             }

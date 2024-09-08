@@ -50,6 +50,7 @@ import com.alibaba.csp.sentinel.spi.Spi;
 public class ClusterBuilderSlot extends AbstractLinkedProcessorSlot<DefaultNode> {
 
     /**
+     * ClusterNode是和Resource绑定的
      * <p>
      * Remember that same resource({@link ResourceWrapper#equals(Object)}) will share
      * the same {@link ProcessorSlotChain} globally, no matter in which context. So if
@@ -96,6 +97,7 @@ public class ClusterBuilderSlot extends AbstractLinkedProcessorSlot<DefaultNode>
          * if context origin is set, we should get or create a new {@link Node} of
          * the specific origin.
          */
+        // 设置来源节点
         if (!"".equals(context.getOrigin())) {
             Node originNode = node.getClusterNode().getOrCreateOriginNode(context.getOrigin());
             context.getCurEntry().setOriginNode(originNode);

@@ -52,6 +52,8 @@ public class FlowRule extends AbstractRule {
     private int grade = RuleConstant.FLOW_GRADE_QPS;
 
     /**
+     * 阈值
+     * 匀速器模式下是：每秒匀速通过的请求数
      * Flow control threshold count.
      */
     private double count;
@@ -79,6 +81,7 @@ public class FlowRule extends AbstractRule {
     private int warmUpPeriodSec = 10;
 
     /**
+     * 最长排队等待时间
      * Max queueing time in rate limiter behavior.
      */
     private int maxQueueingTimeMs = 500;

@@ -26,6 +26,7 @@ import com.alibaba.csp.sentinel.slotchain.ResourceWrapper;
 import com.alibaba.csp.sentinel.slots.nodeselector.NodeSelectorSlot;
 
 /**
+ * 面向链路上的资源 (链路+资源)
  * <p>
  * A {@link Node} used to hold statistics for specific resource name in the specific context.
  * Each distinct resource in each distinct {@link Context} will corresponding to a {@link DefaultNode}.

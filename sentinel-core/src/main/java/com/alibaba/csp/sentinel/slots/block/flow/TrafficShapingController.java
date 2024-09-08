@@ -18,6 +18,8 @@ package com.alibaba.csp.sentinel.slots.block.flow;
 import com.alibaba.csp.sentinel.node.Node;
 
 /**
+ * 流量整形控制器
+ * <p>
  * A universal interface for traffic shaping controller.
  *
  * @author jialiang.linjl
