@@ -73,6 +73,7 @@ public class ThrottlingController implements TrafficShapingController {
         final long maxQueueingTimeNs = maxQueueingTimeMs * MS_TO_NS_OFFSET;
         long currentTime = System.nanoTime();
         // Calculate the interval between every two requests.
+        // 需要等待的时间 = 每两个请求的间隔 * 需要token的数量
         final long costTimeNs = Math.round(1.0d * MS_TO_NS_OFFSET * statDurationMs * acquireCount / maxCountPerStat);
 
         // Expected pass time of this request.
