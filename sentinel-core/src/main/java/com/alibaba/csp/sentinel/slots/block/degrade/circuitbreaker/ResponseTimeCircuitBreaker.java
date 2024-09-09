@@ -73,6 +73,7 @@ public class ResponseTimeCircuitBreaker extends AbstractCircuitBreaker {
             completeTime = TimeUtil.currentTimeMillis();
         }
         long rt = completeTime - entry.getCreateTimestamp();
+        // 计数慢响应
         if (rt > maxAllowedRt) {
             counter.slowCount.add(1);
         }

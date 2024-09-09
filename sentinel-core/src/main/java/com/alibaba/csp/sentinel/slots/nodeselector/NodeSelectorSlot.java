@@ -170,6 +170,7 @@ public class NodeSelectorSlot extends AbstractLinkedProcessorSlot<Object> {
             }
         }
 
+        // 设置当前Entry放入资源DefaultNode(对资源进行各种统计度量以便进行流控)
         context.setCurNode(node);
         fireEntry(context, resourceWrapper, node, count, prioritized, args);
     }

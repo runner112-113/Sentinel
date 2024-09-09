@@ -38,6 +38,7 @@ public class ExceptionCircuitBreaker extends AbstractCircuitBreaker {
     private final int minRequestAmount;
     private final double threshold;
 
+    // sliding window
     private final LeapArray<SimpleErrorCounter> stat;
 
     public ExceptionCircuitBreaker(DegradeRule rule) {

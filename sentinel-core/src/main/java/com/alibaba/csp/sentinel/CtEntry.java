@@ -58,10 +58,12 @@ class CtEntry extends Entry {
         if (context instanceof NullContext) {
             return;
         }
+        // 上一个Entry
         this.parent = context.getCurEntry();
         if (parent != null) {
             ((CtEntry) parent).child = this;
         }
+        // 当前的Entry
         context.setCurEntry(this);
     }
 
