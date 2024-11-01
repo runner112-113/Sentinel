@@ -26,16 +26,19 @@ public class WindowWrap<T> {
 
     /**
      * Time length of a single window bucket in milliseconds.
+     * bucket的ms长度
      */
     private final long windowLengthInMs;
 
     /**
      * Start timestamp of the window in milliseconds.
+     * 当前bucket的起始时间
      */
     private long windowStart;
 
     /**
      * Statistic data.
+     * 统计的值
      */
     private T value;
 

@@ -50,6 +50,7 @@ public class MetricBucket {
     }
 
     private void initMinRt() {
+        // 默认最大rt 5000
         this.minRt = SentinelConfig.statisticMaxRt();
     }
 

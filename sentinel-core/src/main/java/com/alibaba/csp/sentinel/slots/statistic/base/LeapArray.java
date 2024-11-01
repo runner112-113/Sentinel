@@ -50,9 +50,12 @@ public abstract class LeapArray<T> {
      */
     protected int sampleCount;
     /**
-     * 整体窗口的时间长度
+     * 整体窗口的时间长度  ms
      */
     protected int intervalInMs;
+    /**
+     * 整体窗口的时间长度  s
+     */
     private double intervalInSecond;
 
     /**
