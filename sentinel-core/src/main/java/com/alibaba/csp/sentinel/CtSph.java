@@ -123,6 +123,7 @@ public class CtSph implements Sph {
             return new CtEntry(resourceWrapper, null, context);
         }
 
+        // context为空则是sentinel_default_context
         if (context == null) {
             // Using default context.
             context = InternalContextUtil.internalEnter(Constants.CONTEXT_DEFAULT_NAME);

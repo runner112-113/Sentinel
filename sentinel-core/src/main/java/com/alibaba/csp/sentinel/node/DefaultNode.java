@@ -53,6 +53,8 @@ public class DefaultNode extends StatisticNode {
 
     /**
      * Associated cluster node.
+     *
+     * 关联一个ClusterNode，从而联动统计ClusterNode的数据
      */
     private ClusterNode clusterNode;
 

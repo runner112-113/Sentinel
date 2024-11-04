@@ -124,6 +124,7 @@ public class StatisticNode implements Node {
         long currentTime = TimeUtil.currentTimeMillis();
         currentTime = currentTime - currentTime % 1000;
         Map<Long, MetricNode> metrics = new ConcurrentHashMap<>();
+        // 秒级的
         List<MetricNode> nodesOfEverySecond = rollingCounterInMinute.details();
         long newLastFetchTime = lastFetchTime;
         // Iterate metrics of all resources, filter valid metrics (not-empty and up-to-date).
