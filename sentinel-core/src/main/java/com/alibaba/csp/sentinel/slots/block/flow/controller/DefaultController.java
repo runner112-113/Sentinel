@@ -56,11 +56,13 @@ public class DefaultController implements TrafficShapingController {
                 long waitInMs;
                 currentTime = TimeUtil.currentTimeMillis();
                 // 尝试计算排队等待的时间
+                // 尝试借用未来时间窗口，获取一个等待时间
                 waitInMs = node.tryOccupyNext(currentTime, acquireCount, count);
                 if (waitInMs < OccupyTimeoutProperty.getOccupyTimeout()) {
                     // 添加currentTime + waitInMs 对应bucket的PASS数
                     node.addWaitingRequest(currentTime + waitInMs, acquireCount);
                     node.addOccupiedPass(acquireCount);
+                    // sleep至未来时间窗口
                     sleep(waitInMs);
 
                     // PriorityWaitException indicates that the request will pass after waiting for {@link @waitInMs}.

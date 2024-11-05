@@ -37,12 +37,15 @@ public class ThrottlingController implements TrafficShapingController {
 
     private static final long MS_TO_NS_OFFSET = TimeUnit.MILLISECONDS.toNanos(1);
 
+    // 最大的排队时间，如果需要排队的时间超过这个值，那么就直接拒绝，不排队了
     private final int maxQueueingTimeMs;
     private final int statDurationMs;
 
+    // 限流阈值
     private final double count;
     private final boolean useNanoSeconds;
 
+    // 上一次请求通过的时间戳
     private final AtomicLong latestPassedTime = new AtomicLong(-1);
 
     public ThrottlingController(int queueingTimeoutMs, double maxCountPerStat) {

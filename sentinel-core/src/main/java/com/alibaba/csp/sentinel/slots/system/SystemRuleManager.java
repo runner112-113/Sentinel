@@ -95,6 +95,7 @@ public final class SystemRuleManager {
     static {
         checkSystemStatus.set(false);
         statusListener = new SystemStatusListener();
+        // 一秒执行一次 统计currentCpuUsage和currentLoad
         scheduler.scheduleAtFixedRate(statusListener, 0, 1, TimeUnit.SECONDS);
         currentProperty.addListener(listener);
     }

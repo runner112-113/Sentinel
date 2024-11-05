@@ -65,7 +65,10 @@ public final class RuleConstant {
     public static final int RELEASE_RESOURCE_TIMEOUT_STRATEGY = 1;
     public static final int KEEP_RESOURCE_TIMEOUT_STRATEGY = 2;
 
+    // 表示不区分调用者，来自任何调用者的请求都将进行限流统计
     public static final String LIMIT_APP_DEFAULT = "default";
+    // 表示除 {origin} 以外的其余调用方的流量进行流量控制。
+    // 例如：资源 NodeA 配置了一条针对调用者 caller1 的限流规则，同时又配置了一条调用者为 other 的规则，那么任意来自非 caller1 对 NodeA 的调用，都不能超过 other 这条规则定义的阈值。
     public static final String LIMIT_APP_OTHER = "other";
 
     public static final int DEFAULT_SAMPLE_COUNT = 2;

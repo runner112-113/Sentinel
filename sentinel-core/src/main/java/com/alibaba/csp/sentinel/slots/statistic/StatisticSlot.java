@@ -63,12 +63,14 @@ public class StatisticSlot extends AbstractLinkedProcessorSlot<DefaultNode> {
             node.increaseThreadNum();
             node.addPassRequest(count);
 
+            // 请求来源统计
             if (context.getCurEntry().getOriginNode() != null) {
                 // Add count for origin node.
                 context.getCurEntry().getOriginNode().increaseThreadNum();
                 context.getCurEntry().getOriginNode().addPassRequest(count);
             }
 
+            // 全局流量统计
             if (resourceWrapper.getEntryType() == EntryType.IN) {
                 // Add count for global inbound entry node for global statistics.
                 Constants.ENTRY_NODE.increaseThreadNum();
