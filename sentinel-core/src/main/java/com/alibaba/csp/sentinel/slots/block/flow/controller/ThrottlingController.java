@@ -37,11 +37,12 @@ public class ThrottlingController implements TrafficShapingController {
 
     private static final long MS_TO_NS_OFFSET = TimeUnit.MILLISECONDS.toNanos(1);
 
-    // 最大的排队时间，如果需要排队的时间超过这个值，那么就直接拒绝，不排队了
+    // 最大的排队时间，如果需要排队的时间超过这个值，那么就直接拒绝，不排队了，默认500ms
     private final int maxQueueingTimeMs;
+    // 统计的窗口
     private final int statDurationMs;
 
-    // 限流阈值
+    // 限流阈值：每秒（窗口内）允许匀速通过的请求数，QPS设置的值
     private final double count;
     private final boolean useNanoSeconds;
 
@@ -83,11 +84,13 @@ public class ThrottlingController implements TrafficShapingController {
         // 不保证原子性
         long expectedTime = costTimeNs + latestPassedTime.get();
 
+        // 可以通过，设置 latestPassedTime 然后就返回 true 了
         if (expectedTime <= currentTime) {
             // Contention may exist here, but it's okay.
             latestPassedTime.set(currentTime);
             return true;
         } else {
+            // 不可以通过，需要等待
             final long curNanos = System.nanoTime();
             // Calculate the time to wait.
             long waitTime = costTimeNs + latestPassedTime.get() - curNanos;

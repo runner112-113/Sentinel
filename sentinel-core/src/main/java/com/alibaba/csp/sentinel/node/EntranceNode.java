@@ -38,6 +38,8 @@ import com.alibaba.csp.sentinel.slots.nodeselector.NodeSelectorSlot;
  * @see ContextUtil#enter(String, String)
  * @see NodeSelectorSlot
  */
+// EntranceNode代表调用链的入口节点，持有某个Context中调用的信息，同一个Context共享一个EntranceNode。
+// EntranceNode的统计维度为Context。需要注意的是EntranceNode继承了DefaultNode。
 public class EntranceNode extends DefaultNode {
 
     public EntranceNode(ResourceWrapper id, ClusterNode clusterNode) {

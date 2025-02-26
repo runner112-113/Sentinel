@@ -33,6 +33,7 @@ public class DefaultController implements TrafficShapingController {
 
     private static final int DEFAULT_AVG_USED_TOKENS = 0;
 
+    // 每秒能通过的请求
     private double count;
     private int grade;
 
@@ -50,7 +51,7 @@ public class DefaultController implements TrafficShapingController {
     public boolean canPass(Node node, int acquireCount, boolean prioritized) {
         int curCount = avgUsedTokens(node);
         if (curCount + acquireCount > count) {
-            // prioritized为true表示当前请求优先且是QPS
+            // 特殊处理：prioritized为true表示当前请求优先且是QPS
             if (prioritized && grade == RuleConstant.FLOW_GRADE_QPS) {
                 long currentTime;
                 long waitInMs;
@@ -58,6 +59,7 @@ public class DefaultController implements TrafficShapingController {
                 // 尝试计算排队等待的时间
                 // 尝试借用未来时间窗口，获取一个等待时间
                 waitInMs = node.tryOccupyNext(currentTime, acquireCount, count);
+                // 等待时间是否小于occupyTimeout，默认500ms
                 if (waitInMs < OccupyTimeoutProperty.getOccupyTimeout()) {
                     // 添加currentTime + waitInMs 对应bucket的PASS数
                     node.addWaitingRequest(currentTime + waitInMs, acquireCount);

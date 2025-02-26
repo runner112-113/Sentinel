@@ -53,7 +53,7 @@ public final class RuleConstant {
     public static final int CONTROL_BEHAVIOR_DEFAULT = 0;
     // WARM UP
     public static final int CONTROL_BEHAVIOR_WARM_UP = 1;
-    // 匀速排队
+    // 匀速排队 - 漏桶
     public static final int CONTROL_BEHAVIOR_RATE_LIMITER = 2;
     public static final int CONTROL_BEHAVIOR_WARM_UP_RATE_LIMITER = 3;
 

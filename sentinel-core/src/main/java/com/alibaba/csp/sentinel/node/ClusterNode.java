@@ -44,6 +44,7 @@ import com.alibaba.csp.sentinel.util.AssertUtil;
  * @author qinan.qn
  * @author jialiang.linjl
  */
+// ClusterNode保存的是同一个Resource的相关的统计信息，是以Resource为维度的，不区分Context
 public class ClusterNode extends StatisticNode {
 
     private final String name;
@@ -67,6 +68,7 @@ public class ClusterNode extends StatisticNode {
      * at the very beginning while concurrent map will hold the lock all the time.
      * </p>
      */
+    // 使用StatisticNode保存不同来源的统计信息
     private Map<String, StatisticNode> originCountMap = new HashMap<>();
 
     private final ReentrantLock lock = new ReentrantLock();
