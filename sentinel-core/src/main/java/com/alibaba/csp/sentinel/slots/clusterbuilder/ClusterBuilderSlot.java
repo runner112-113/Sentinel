@@ -91,6 +91,7 @@ public class ClusterBuilderSlot extends AbstractLinkedProcessorSlot<DefaultNode>
                 }
             }
         }
+        // 设置ClusterNode - 只关联resourceName
         node.setClusterNode(clusterNode);
 
         /*
@@ -99,6 +100,7 @@ public class ClusterBuilderSlot extends AbstractLinkedProcessorSlot<DefaultNode>
          */
         // 设置来源节点
         if (!"".equals(context.getOrigin())) {
+            // 在集群中添加来源结点OriginNode
             Node originNode = node.getClusterNode().getOrCreateOriginNode(context.getOrigin());
             context.getCurEntry().setOriginNode(originNode);
         }

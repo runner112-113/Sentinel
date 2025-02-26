@@ -47,6 +47,7 @@ import com.alibaba.csp.sentinel.util.AssertUtil;
 // ClusterNode保存的是同一个Resource的相关的统计信息，是以Resource为维度的，不区分Context
 public class ClusterNode extends StatisticNode {
 
+    // resource name
     private final String name;
     private final int resourceType;
 

@@ -130,6 +130,7 @@ public class NodeSelectorSlot extends AbstractLinkedProcessorSlot<Object> {
     /**
      * {@link DefaultNode}s of the same resource in different context.
      */
+    // Context级别的Node
     private volatile Map<String/*contextName*/, DefaultNode> map = new HashMap<String, DefaultNode>(10);
 
     @Override
