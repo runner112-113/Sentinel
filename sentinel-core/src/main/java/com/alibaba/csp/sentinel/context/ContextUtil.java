@@ -52,7 +52,7 @@ public class ContextUtil {
     /**
      * Holds all {@link EntranceNode}. Each {@link EntranceNode} is associated with a distinct context name.
      */
-    private static volatile Map<String, DefaultNode> contextNameNodeMap = new HashMap<>();
+    private static volatile Map<String/*contextName*/, DefaultNode/*EntranceNode*/> contextNameNodeMap = new HashMap<>();
 
     private static final ReentrantLock LOCK = new ReentrantLock();
     private static final Context NULL_CONTEXT = new NullContext();
@@ -153,6 +153,7 @@ public class ContextUtil {
             }
             context = new Context(node, name);
             context.setOrigin(origin);
+            // 将context放置到线程变量中
             contextHolder.set(context);
         }
 

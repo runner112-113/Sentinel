@@ -87,6 +87,7 @@ public class FlowRuleChecker {
     }
 
     static Node selectReferenceNode(FlowRule rule, Context context, DefaultNode node) {
+        // 获取关联的资源
         String refResource = rule.getRefResource();
         int strategy = rule.getStrategy();
 
@@ -115,8 +116,11 @@ public class FlowRuleChecker {
 
     static Node selectNodeByRequesterAndStrategy(/*@NonNull*/ FlowRule rule, Context context, DefaultNode node) {
         // The limit app should not be empty.
+        // 规则限流的应用
         String limitApp = rule.getLimitApp();
+        // 规则限制的策略
         int strategy = rule.getStrategy();
+        // 请求的来源
         String origin = context.getOrigin();
 
         if (limitApp.equals(origin) && filterOrigin(origin)) {

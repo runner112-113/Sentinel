@@ -70,7 +70,7 @@ public class ClusterNode extends StatisticNode {
      * </p>
      */
     // 使用StatisticNode保存不同来源的统计信息
-    private Map<String, StatisticNode> originCountMap = new HashMap<>();
+    private Map<String/*origin来源*/, StatisticNode> originCountMap = new HashMap<>();
 
     private final ReentrantLock lock = new ReentrantLock();
 

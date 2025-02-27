@@ -303,6 +303,7 @@ public final class SystemRuleManager {
         }
 
         // total qps
+        // 全局QPS控制
         double currentQps = Constants.ENTRY_NODE.passQps();
         if (currentQps + count > qps) {
             throw new SystemBlockException(resourceWrapper.getName(), "qps");
