@@ -100,7 +100,7 @@ public class FlowRuleChecker {
             return ClusterBuilderSlot.getClusterNode(refResource);
         }
 
-        // 链路策略 - 同context则返回当前Node
+        // 链路策略 - 同context则返回当前Node，只针对指定链路访问到本资源进行流控
         if (strategy == RuleConstant.STRATEGY_CHAIN) {
             if (!refResource.equals(context.getName())) {
                 return null;
