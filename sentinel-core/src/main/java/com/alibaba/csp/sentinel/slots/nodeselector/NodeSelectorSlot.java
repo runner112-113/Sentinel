@@ -130,7 +130,7 @@ public class NodeSelectorSlot extends AbstractLinkedProcessorSlot<Object> {
     /**
      * {@link DefaultNode}s of the same resource in different context.
      */
-    // Context级别的Node
+    // Context级别的Node - EntranceNode
     private volatile Map<String/*contextName*/, DefaultNode> map = new HashMap<String, DefaultNode>(10);
 
     @Override
@@ -154,7 +154,8 @@ public class NodeSelectorSlot extends AbstractLinkedProcessorSlot<Object> {
          * The answer is all {@link DefaultNode}s with same resource name share one
          * {@link ClusterNode}. See {@link ClusterBuilderSlot} for detail.
          */
-        // 上下文相关的DefaultNode
+        // 上下文相关的DefaultNode - 在Context级别添加child list
+        // 每个资源resource对应一个链 - 所以DefaultNode是context+resource级别的
         DefaultNode node = map.get(context.getName());
         if (node == null) {
             synchronized (this) {

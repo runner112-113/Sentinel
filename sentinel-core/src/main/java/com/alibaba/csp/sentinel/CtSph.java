@@ -135,7 +135,7 @@ public class CtSph implements Sph {
             return new CtEntry(resourceWrapper, null, context);
         }
 
-        // 构建ProcessorSlot链
+        // 构建ProcessorSlot链 ： 每个资源对应一个ProcessChain
         ProcessorSlot<Object> chain = lookProcessChain(resourceWrapper);
 
         /*
@@ -150,6 +150,7 @@ public class CtSph implements Sph {
         try {
             chain.entry(context, resourceWrapper, null, count, prioritized, args);
         } catch (BlockException e1) {
+            // 获取资源失败
             e.exit(count, args);
             throw e1;
         } catch (Throwable e1) {

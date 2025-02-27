@@ -50,6 +50,7 @@ public class DefaultNode extends StatisticNode {
     /**
      * The list of all child nodes.
      */
+    // child nodes
     private volatile Set<Node> childList = new HashSet<>();
 
     /**
