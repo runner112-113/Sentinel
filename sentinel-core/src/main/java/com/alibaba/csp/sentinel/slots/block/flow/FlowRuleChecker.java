@@ -95,10 +95,12 @@ public class FlowRuleChecker {
             return null;
         }
 
+        // 关联策略 - 返回关联资源的ClusterNode
         if (strategy == RuleConstant.STRATEGY_RELATE) {
             return ClusterBuilderSlot.getClusterNode(refResource);
         }
 
+        // 链路策略 - 同context则返回当前Node
         if (strategy == RuleConstant.STRATEGY_CHAIN) {
             if (!refResource.equals(context.getName())) {
                 return null;
