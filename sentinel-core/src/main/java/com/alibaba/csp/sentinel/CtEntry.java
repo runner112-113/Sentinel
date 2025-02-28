@@ -32,6 +32,7 @@ import com.alibaba.csp.sentinel.util.function.BiConsumer;
  * @author jialiang.linjl
  * @author Eric Zhao
  */
+// 双向链表
 class CtEntry extends Entry {
 
     protected Entry parent = null;
